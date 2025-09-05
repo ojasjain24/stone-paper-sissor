@@ -1,0 +1,29 @@
+<div class="login">
+  <div class="login-card">
+    <h1>Rock Paper Scissors</h1>
+    <p class="subtitle">Enter your username to join the game</p>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <div class="input-group">
+        <input
+          name="username"
+          [(ngModel)]="username"
+          placeholder="Enter your username"
+          required
+          class="username-input"
+          maxlength="20"
+        />
+      </div>
+
+      <button type="submit" [disabled]="!username" class="join-btn">
+        Join Game
+      </button>
+
+      <div class="error" *ngIf="error">
+        {{ error }}
+      </div>
+    </form>
+
+    <p class="footer">Challenge friends and climb the leaderboard!</p>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="game" *ngIf="ready">
+  <header class="game-header">
+    <h1>Rock Paper Scissors</h1>
+    <div class="user-section" *ngIf="me">
+      <span class="username">{{ me }}</span>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="players">
+    <div class="player">
+      <div class="player-name">{{ a }}</div>
+      <div class="player-choice" [class.revealed]="!!state?.result">
+        {{ getPlayerChoice("a") }}
+      </div>
+    </div>
+
+    <div class="vs">VS</div>
+
+    <div class="player">
+      <div class="player-name">{{ b }}</div>
+      <div class="player-choice" [class.revealed]="!!state?.result">
+        {{ getPlayerChoice("b") }}
+      </div>
+    </div>
+  </div>
+
+  <main class="game-main">
+    <div class="choices" *ngIf="!isGameFinished()">
+      <h3>Choose your move:</h3>
+      <div class="choice-buttons">
+        <button
+          class="choice-btn"
+          (click)="pick('rock')"
+          [disabled]="isGameFinished()"
+        >
+          <span class="icon">🪨</span>
+          <span class="text">Rock</span>
+        </button>
+        <button
+          class="choice-btn"
+          (click)="pick('paper')"
+          [disabled]="isGameFinished()"
+        >
+          <span class="icon">📄</span>
+          <span class="text">Paper</span>
+        </button>
+        <button
+          class="choice-btn"
+          (click)="pick('scissors')"
+          [disabled]="isGameFinished()"
+        >
+          <span class="icon">✂️</span>
+          <span class="text">Scissors</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="result" *ngIf="state?.result">
+      <div
+        class="result-message"
+        [class.win]="isWinner()"
+        [class.lose]="isLoser()"
+        [class.draw]="isDraw()"
+      >
+        {{ getResultMessage() }}
+      </div>
+    </div>
+
+    <div class="actions" *ngIf="state?.result">
+      <button class="action-btn primary" (click)="playAgain()">
+        Play Again
+      </button>
+      <button class="action-btn secondary" (click)="backToLobby()">
+        Back to Lobby
+      </button>
+    </div>
+  </main>
+</div>

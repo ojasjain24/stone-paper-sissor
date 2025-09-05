@@ -1,0 +1,56 @@
+<div class="lobby">
+  <header class="lobby-header">
+    <h1>Game Lobby</h1>
+    <div class="user-section" *ngIf="me">
+      <span class="username">{{ me }}</span>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="lobby-content">
+    <div class="main-content">
+      <div class="players-section">
+        <h2>Online Players</h2>
+        <div
+          class="players-list"
+          *ngIf="onlinePlayers.length > 0; else noPlayers"
+        >
+          <div
+            class="player-item"
+            *ngFor="let player of onlinePlayers"
+            [class.current-user]="player.name === me"
+          >
+            <div class="player-info">
+              <span class="player-name">{{ player.name }}</span>
+              <span class="player-score">{{ player.score }} points</span>
+            </div>
+            <button
+              class="challenge-btn"
+              (click)="challenge(player.name)"
+              [disabled]="player.name === me"
+            >
+              {{ player.name === me ? "You" : "Challenge" }}
+            </button>
+          </div>
+        </div>
+        <ng-template #noPlayers>
+          <p class="no-players">No other players online</p>
+        </ng-template>
+      </div>
+
+      <div class="queue-section" *ngIf="queue.length > 0">
+        <h2>Waiting Queue</h2>
+        <div class="queue-list">
+          <div class="queue-item" *ngFor="let player of queue; let i = index">
+            <span class="queue-position">{{ i + 1 }}</span>
+            <span class="queue-player">{{ player }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="leaderboard-section">
+      <app-leaderboard></app-leaderboard>
+    </div>
+  </div>
+</div>

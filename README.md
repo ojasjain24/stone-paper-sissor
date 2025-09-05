@@ -1,27 +1,50 @@
-# RockPaperScissorsNew
+# Rock Paper Scissors Game
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
+A multiplayer Rock Paper Scissors game built with Angular. Play with friends by opening multiple browser tabs!
 
-## Development server
+## Quick Start
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### 1. Install Angular CLI (if you don't have it)
 
-## Code scaffolding
+```bash
+npm install -g @angular/cli
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### 2. Install Dependencies
 
-## Build
+```bash
+npm install
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 3. Start the App
 
-## Running unit tests
+```bash
+npm start
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 4. Play the Game
 
-## Running end-to-end tests
+- Open your browser and go to `http://localhost:4200`
+- Enter a username to join
+- Open another tab/window to play with a friend
+- Challenge other players and climb the leaderboard!
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## How to Play
 
-## Further help
+1. **Login**: Enter a unique username
+2. **Lobby**: See all online players and challenge them
+3. **Game**: Choose Rock, Paper, or Scissors
+4. **Results**: See who wins and update scores
+5. **Leaderboard**: Check your ranking
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Requirements
+
+- Node.js (version 14 or higher)
+- npm (comes with Node.js)
+- Angular CLI
+
+## Notes
+
+- The game works across multiple browser tabs
+- All data is stored locally in your browser
+- Clear browser data to reset scores and players
