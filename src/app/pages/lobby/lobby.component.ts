@@ -19,14 +19,13 @@ export class LobbyComponent implements OnDestroy {
 
   me = '';
   onlinePlayers: any[] = [];
-  queue: string[] = [];
+  upcomingMatches: any[] = [];
   private subscription: any;
 
   constructor() {
     this.loadPlayers();
-    this.loadQueue();
+    this.loadUpcomingMatches();
     this.checkForMatches();
-    this.lobbyService.checkQueueAndPrompt();
   }
 
   private loadPlayers() {
@@ -38,9 +37,11 @@ export class LobbyComponent implements OnDestroy {
     });
   }
 
-  private loadQueue() {
-    this.lobbyService.queue$.subscribe((queue) => {
-      this.queue = queue;
+  private loadUpcomingMatches() {
+    this.lobbyService.upcomingMatches$.subscribe((matches) => {
+      this.upcomingMatches = matches.filter(
+        (match) => match.status === 'pending'
+      );
     });
   }
 
@@ -57,11 +58,33 @@ export class LobbyComponent implements OnDestroy {
   challenge(opponent: string) {
     if (!this.me || this.me === opponent) return;
 
-    const matchStarted = this.lobbyService.tryStartMatch(this.me, opponent);
+    const matchId = this.lobbyService.createUpcomingMatch(this.me, opponent);
 
-    if (matchStarted) {
-      this.router.navigateByUrl('/game');
+    if (matchId) {
+      // Auto-start the match if both players are online
+      const matchStarted = this.lobbyService.tryStartMatch(matchId);
+      if (matchStarted) {
+        this.router.navigateByUrl('/game');
+      }
     }
+  }
+
+  cancelMatch(matchId: string) {
+    this.lobbyService.cancelUpcomingMatch(matchId);
+  }
+
+  isMyMatch(match: any): boolean {
+    return match.players.includes(this.me);
+  }
+
+  getMatchTime(createdAt: number): string {
+    const now = Date.now();
+    const diff = now - createdAt;
+    const minutes = Math.floor(diff / 60000);
+
+    if (minutes < 1) return 'Just now';
+    if (minutes === 1) return '1 minute ago';
+    return `${minutes} minutes ago`;
   }
 
   logout() {

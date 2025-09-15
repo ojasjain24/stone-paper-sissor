@@ -76,7 +76,7 @@
   overflow: hidden;
 }
 
-.queue-section {
+.upcoming-matches-section {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 15px;
   padding: 20px;
@@ -88,7 +88,7 @@
 }
 
 .players-section h2,
-.queue-section h2 {
+.upcoming-matches-section h2 {
   margin: 0 0 20px 0;
   font-size: 1.5rem;
   color: #fff;
@@ -162,39 +162,95 @@
   margin: 20px 0;
 }
 
-.queue-list {
+.matches-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   overflow-y: auto;
   flex: 1;
 }
 
-.queue-item {
+.match-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(76, 175, 80, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.match-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.match-players {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(255, 193, 7, 0.1);
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 193, 7, 0.2);
-}
-
-.queue-position {
-  background: #ffc107;
-  color: #333;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-weight: 600;
-  font-size: 12px;
 }
 
-.queue-player {
+.player {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.player.current-user {
+  background: rgba(102, 126, 234, 0.3);
+  color: #667eea;
+}
+
+.vs {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
   font-weight: 500;
+}
+
+.match-time {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.match-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.start-btn {
+  background: linear-gradient(45deg, #4caf50, #45a049);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.start-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+.cancel-btn {
+  background: linear-gradient(45deg, #f44336, #d32f2f);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.cancel-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
 }
 
 .leaderboard-section {
@@ -217,7 +273,7 @@
   }
 
   .players-section,
-  .queue-section {
+  .upcoming-matches-section {
     height: auto;
     min-height: 200px;
   }

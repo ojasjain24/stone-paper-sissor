@@ -90,7 +90,6 @@ export class PlayerService {
     if (currentUser) {
       this.setOnline(currentUser, false);
       this.currentUserSubject.next('');
-      localStorage.removeItem('rps_player_name');
     }
   }
 

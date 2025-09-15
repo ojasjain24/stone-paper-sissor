@@ -60,12 +60,6 @@ export class GameComponent {
         this.router.navigateByUrl('/lobby');
         return;
       }
-
-      if (match.players.includes(this.me)) {
-        if (match.players[0] !== this.a || match.players[1] !== this.b) {
-          this.router.navigateByUrl('/lobby');
-        }
-      }
     });
   }
 
@@ -93,14 +87,12 @@ export class GameComponent {
 
   isWinner() {
     if (!this.state?.result) return false;
-    const myPlayer = this.me === this.a ? 'a' : 'b';
-    return this.state.result === myPlayer;
+    return this.state.result === this.me;
   }
 
   isLoser() {
     if (!this.state?.result) return false;
-    const myPlayer = this.me === this.a ? 'a' : 'b';
-    return this.state.result !== myPlayer && this.state.result !== 'draw';
+    return this.state.result !== this.me && this.state.result !== 'draw';
   }
 
   isDraw() {

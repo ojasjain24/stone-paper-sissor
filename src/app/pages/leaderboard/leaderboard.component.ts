@@ -17,7 +17,6 @@ export class LeaderboardComponent {
 
   constructor() {
     this.loadPlayers();
-    this.getCurrentUser();
   }
 
   private loadPlayers() {
@@ -26,9 +25,5 @@ export class LeaderboardComponent {
         (a: any, b: any) => b.score - a.score
       );
     });
-  }
-
-  private getCurrentUser() {
-    this.currentUser = localStorage.getItem('rps_player_name');
   }
 }

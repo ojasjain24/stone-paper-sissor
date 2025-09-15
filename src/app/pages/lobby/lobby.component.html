@@ -38,12 +38,38 @@
         </ng-template>
       </div>
 
-      <div class="queue-section" *ngIf="queue.length > 0">
-        <h2>Waiting Queue</h2>
-        <div class="queue-list">
-          <div class="queue-item" *ngFor="let player of queue; let i = index">
-            <span class="queue-position">{{ i + 1 }}</span>
-            <span class="queue-player">{{ player }}</span>
+      <div class="upcoming-matches-section" *ngIf="upcomingMatches.length > 0">
+        <h2>Upcoming Matches</h2>
+        <div class="matches-list">
+          <div class="match-item" *ngFor="let match of upcomingMatches">
+            <div class="match-info">
+              <div class="match-players">
+                <span
+                  class="player"
+                  [class.current-user]="match.players[0] === me"
+                >
+                  {{ match.players[0] }}
+                </span>
+                <span class="vs">vs</span>
+                <span
+                  class="player"
+                  [class.current-user]="match.players[1] === me"
+                >
+                  {{ match.players[1] }}
+                </span>
+              </div>
+              <div class="match-time">
+                {{ getMatchTime(match.createdAt) }}
+              </div>
+            </div>
+            <div class="match-actions" *ngIf="isMyMatch(match)">
+              <button
+                class="cancel-btn"
+                (click)="cancelMatch(match.id)"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       </div>
